@@ -93,11 +93,32 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_checkout_a_book_when_book_is_already_checkedOut() {
-
         setSystemInContent("1\n4\n1\n");
         biblioteca.start();
 
         String expectedStr = "That book is not available.";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+    @Test
+    public void customer_could_return_book_when_this_book_belong_to_Biblioteca() {
+        setSystemInContent("1\n1\n1\n1\n2\nbook1\nq\n");
+        biblioteca.start();
+
+        String expectedStr = "Thank you for returning the book.";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+    @Test
+    public void customer_could_not_return_book_when_this_book_not_belong_to_Biblioteca() {
+        setSystemInContent("1\n1\n1\n1\n2\nbook3\nq\n");
+        biblioteca.start();
+
+        String expectedStr = "That is not a valid book to return.";
         assertTrue(systemErrorContent.toString().isEmpty());
         assertFalse(systemOutContent.toString().isEmpty());
         assertTrue(systemOutContent.toString().contains(expectedStr));

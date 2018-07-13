@@ -29,9 +29,29 @@ public class BookControl {
         res += splitLine + "\n" + String.format("%-15s %-15s %-15s %-15s", "|Number", "|Name", "|Author", "|Year Published") + "|\n" + splitLine + "\n";
         for (int i = 0; i < books.size(); ++i) {
             Book book = books.get(i);
-            res += String.format("%-15s %-15s %-15s %-15s", "|" + String.valueOf(i + 1), "|" + book.getName(), "|" + book.getAuthor(), "|" + book.getYearPublished()) + "|\n";
+            if (!book.isCheckedOut()) {
+                res += String.format("%-15s %-15s %-15s %-15s", "|" + String.valueOf(i + 1), "|" + book.getName(), "|" + book.getAuthor(), "|" + book.getYearPublished()) + "|\n";
+            }
         }
         res += splitLine + "\n";
         System.out.print(res);
+    }
+
+    public boolean isValidBook(String name) {
+        for (int i = 0; i < books.size(); ++i) {
+            if (books.get(i).getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Book getBook(String name) {
+        for (int i = 0; i < books.size(); ++i) {
+            if (books.get(i).getName().equals(name)) {
+                return books.get(i);
+            }
+        }
+        return null;
     }
 }
