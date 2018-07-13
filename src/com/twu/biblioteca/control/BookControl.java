@@ -19,4 +19,21 @@ public class BookControl {
     public ArrayList<Book> getBooks() {
         return books;
     }
+
+    public String print() {
+        String res = "";
+        String splitLine = "";
+        for (int i = 0; i < 48; i++) {
+            splitLine += "-";
+        }
+        res += splitLine + "\n" + String.format("%-15s %-15s %-15s", "|Name", "|Author", "|Year Published") + "|\n" + splitLine + "\n";
+        for (int i = 0; i < books.size(); ++i) {
+            Book book = books.get(i);
+            res += String.format("%-15s %-15s %-15s", "|" + book.getName(), "|" + book.getAuthor(), "|" + book.getYearPublished()) + "|\n";
+        }
+        res += splitLine;
+        return res;
+
+
+    }
 }

@@ -37,8 +37,13 @@ public class BibliotecaTest {
     @Test
     public void should_return_list_books_after_welcome_message() {
         biblioteca.start();
-
-        String expectedStr = "";
+        String expectedStr ="------------------------------------------------\n" +
+                "|Name           |Author         |Year Published|\n" +
+                "------------------------------------------------\n" +
+                "|book1          |zhangsan       |2000          |\n" +
+                "|book2          |lisi           |2005          |\n" +
+                "|book3          |wangwu         |2010          |\n" +
+                "------------------------------------------------";
 
         assertTrue(systemErrorContent.toString().isEmpty());
         assertFalse(systemOutContent.toString().isEmpty());
