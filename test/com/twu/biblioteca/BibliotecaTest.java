@@ -79,4 +79,28 @@ public class BibliotecaTest {
         assertFalse(systemOutContent.toString().isEmpty());
         assertTrue(systemOutContent.toString().contains(expectedStr));
     }
+
+    @Test
+    public void customer_could_checkout_a_book_when_book_is_not_checkedOut() {
+        setSystemInContent("1\n1\n");
+        biblioteca.start();
+
+        String expectedStr = "Thank you! Enjoy the book";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+    @Test
+    public void customer_could_not_checkout_a_book_when_book_is_already_checkedOut() {
+
+        setSystemInContent("1\n4\n1\n");
+        biblioteca.start();
+
+        String expectedStr = "That book is not available.";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
 }
