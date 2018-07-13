@@ -49,5 +49,12 @@ public class BookTest {
 
         assertFalse(bookCheckedOut);
     }
+    @Test
+    public void could_change_checkedOut_state_based_on_your_need() {
+        assertFalse(book.isCheckedOut());
 
+        book.setCheckedOut(true);
+
+        assertTrue(book.isCheckedOut());
+    }
 }

@@ -6,13 +6,12 @@ public class Book {
     String name;
     String author;
     Integer yearPublished;
-    boolean checkedOut;
+    Boolean checkedOut = false;
 
     public Book(String name, String author, Integer yearPublished) {
         this.name = name;
         this.author = author;
         this.yearPublished = yearPublished;
-        this.checkedOut = false;
     }
 
     public String getName() {
@@ -27,7 +26,7 @@ public class Book {
         return yearPublished;
     }
 
-    public boolean isCheckedOut() {
+    public Boolean isCheckedOut() {
         return checkedOut;
     }
 
