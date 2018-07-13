@@ -22,9 +22,10 @@ public class MenuTest {
     public void should_only_return_List_Books_when_get_initial_main_menu() {
         ArrayList<String> names = menu.getMenuList();
 
-        assertEquals(1, names.size());
+        assertEquals(2, names.size());
         assertEquals(new ArrayList<String>() {{
             add("List Books");
+            add("List Movies");
         }}, names);
     }
 
@@ -44,6 +45,7 @@ public class MenuTest {
         menu.addMenu("Quit");
         ArrayList<String> names = new ArrayList<String>();
         names.add("List Books");
+        names.add("List Movies");
         names.add("Quit");
 
         assertEquals(names, menu.getMenuList());
@@ -52,6 +54,7 @@ public class MenuTest {
     @Test
     public void should_print_menu_list_when_print() {
         String expectedStr = "1.List Books\r\n" +
+                "2.List Movies\r\n" +
                 "\r\n" +
                 "Choose one option with number or quit:";
         ByteArrayOutputStream systemOutContent = new ByteArrayOutputStream();

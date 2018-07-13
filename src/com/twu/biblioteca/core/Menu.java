@@ -7,6 +7,7 @@ public class Menu {
 
     public Menu() {
         menuList.add("List Books");
+        menuList.add("List Movies");
     }
 
     public Menu(ArrayList<String> menuList) {
