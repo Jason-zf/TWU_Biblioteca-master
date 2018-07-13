@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.control.BookControl;
+import com.twu.biblioteca.control.BookRepository;
 import com.twu.biblioteca.core.Menu;
 
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Biblioteca {
     private Menu mainMenu = new Menu();
-    private BookControl bookControl = new BookControl();
+    private BookRepository bookRepository = new BookRepository();
 
     public Biblioteca() {
     }
@@ -50,7 +50,7 @@ public class Biblioteca {
 
         switch (optionNum) {
             case 1:
-                bookControl.print();
+                bookRepository.print();
                 subMenuProcess(scanner);
                 break;
             case 2:
@@ -126,14 +126,14 @@ public class Biblioteca {
                 System.out.print("Input a book number or input 'm' to main menu:");
                 continue;
             }
-            if (0 < optionNum && optionNum <= bookControl.getBooks().size()) {
-                if (bookControl.getBooks().get(optionNum - 1).isCheckedOut()) {
+            if (0 < optionNum && optionNum <= bookRepository.getBooks().size()) {
+                if (bookRepository.getBooks().get(optionNum - 1).isCheckedOut()) {
                     System.out.println("That book is not available.");
                     System.out.print("Input another book number or press 'm' to main menu:");
                     continue;
                 } else {
                     System.out.println("Thank you! Enjoy the book");
-                    bookControl.getBooks().get(optionNum-1).setCheckedOut(true);
+                    bookRepository.getBooks().get(optionNum - 1).setCheckedOut(true);
                     mainMenuProcess(scanner);
                 }
             } else {
@@ -151,8 +151,8 @@ public class Biblioteca {
         String name = "";
         while (true) {
             name = scanner.nextLine();
-            if (bookControl.isValidBook(name)) {
-                bookControl.getBook(name).setCheckedOut(false);
+            if (bookRepository.isValidBook(name)) {
+                bookRepository.getBook(name).setCheckedOut(false);
                 System.out.println("Thank you for returning the book.");
                 mainMenuProcess(scanner);
             } else if (name.toLowerCase().equals("q") || name.toLowerCase().equals("quit")) {

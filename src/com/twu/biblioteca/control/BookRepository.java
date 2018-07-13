@@ -4,10 +4,10 @@ import com.twu.biblioteca.core.Book;
 
 import java.util.ArrayList;
 
-public class BookControl {
+public class BookRepository {
     private ArrayList<Book> books = new ArrayList<Book>();
 
-    public BookControl() {
+    public BookRepository() {
         books.add(new Book("book1", "zhangsan", 2000));
         books.add(new Book("book2", "lisi", 2005));
         books.add(new Book("book3", "wangwu", 2010));

@@ -29,7 +29,7 @@ public class BibliotecaTest {
         systemErrorContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(systemOutContent));
         System.setErr(new PrintStream(systemErrorContent));
-        setSystemInContent("1");
+        setSystemInContent("1\nq\n");
     }
 
 
@@ -71,7 +71,7 @@ public class BibliotecaTest {
 
     @Test
     public void should_judge_invalid_option() {
-        setSystemInContent("2\n1\n");
+        setSystemInContent("2\nq\n");
         biblioteca.start();
 
         String expectedStr = "Select a valid option!";
@@ -82,7 +82,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_checkout_a_book_when_book_is_not_checkedOut() {
-        setSystemInContent("1\n1\n");
+        setSystemInContent("1\n1\n1\nq\n");
         biblioteca.start();
 
         String expectedStr = "Thank you! Enjoy the book";
@@ -93,7 +93,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_checkout_a_book_when_book_is_already_checkedOut() {
-        setSystemInContent("1\n4\n1\n");
+        setSystemInContent("1\n1\n4\nq\n");
         biblioteca.start();
 
         String expectedStr = "That book is not available.";

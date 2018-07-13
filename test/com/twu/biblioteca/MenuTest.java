@@ -50,7 +50,8 @@ public class MenuTest {
     @Test
     public void should_print_menu_list_when_print() {
         String expectedStr = "1.List Books\r\n" +
-                "Choose one option with number:";
+                "\r\n" +
+                "Choose one option with number or quit:";
         ByteArrayOutputStream systemOutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(systemOutContent));
         menu.print();

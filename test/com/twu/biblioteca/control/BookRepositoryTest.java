@@ -12,12 +12,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class BookControlTest {
-    private BookControl bookControl;
+public class BookRepositoryTest {
+    private BookRepository bookRepository;
 
     @Before
     public void setUp() throws Exception {
-        bookControl = new BookControl();
+        bookRepository = new BookRepository();
     }
 
     @Test
@@ -28,7 +28,7 @@ public class BookControlTest {
             add(new Book("book3", "wangwu", 2010));
         }};
 
-        assertEquals(expectedBooks, bookControl.getBooks());
+        assertEquals(expectedBooks, bookRepository.getBooks());
     }
 
     @Test
@@ -42,21 +42,21 @@ public class BookControlTest {
                 "-----------------------------------------------------------------\n";
         ByteArrayOutputStream systemOutContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(systemOutContent));
-        bookControl.print();
+        bookRepository.print();
 
         assertEquals(expectedStr, systemOutContent.toString());
     }
 
     @Test
     public void should_return_true_when_book_is_valid() {
-        boolean flag = bookControl.isValidBook("book1");
+        boolean flag = bookRepository.isValidBook("book1");
 
         assertTrue(flag);
     }
 
     @Test
     public void should_return_false_when_book_is_invalid() {
-        boolean flag = bookControl.isValidBook("book4");
+        boolean flag = bookRepository.isValidBook("book4");
 
         assertFalse(flag);
     }
@@ -65,13 +65,13 @@ public class BookControlTest {
     public void should_return_book_when_get_valid_book() {
         Book book = new Book("book1", "zhangsan", 2000);
 
-        assertEquals(book, bookControl.getBook("book1"));
+        assertEquals(book, bookRepository.getBook("book1"));
     }
 
     @Test
     public void should_return_null_when_get_invalid_book() {
         Book book = null;
 
-        assertEquals(book, bookControl.getBook("book4"));
+        assertEquals(book, bookRepository.getBook("book4"));
     }
 }
