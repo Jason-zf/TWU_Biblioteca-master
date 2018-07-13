@@ -65,8 +65,8 @@ public class Biblioteca {
 
     private void subMenuProcess(Scanner scanner) {
         Menu subMenu = new Menu(new ArrayList<String>() {{
-            add("1.Checkout Book");
-            add("2.Return Book");
+            add(".Checkout Book");
+            add(".Return Book");
         }});
         System.out.println();
         subMenu.print();
@@ -107,7 +107,7 @@ public class Biblioteca {
 
     private void checkedOutBookProcess(Scanner scanner) {
         System.out.println();
-        System.out.print("Input a book number or input 'm' to main menu:");
+        System.out.print("Input a book number to checkout or input 'm' to main menu:");
         Integer optionNum = 1;
         String in = "";
         while (true) {
@@ -129,7 +129,7 @@ public class Biblioteca {
             if (0 < optionNum && optionNum <= bookControl.getBooks().size()) {
                 if (bookControl.getBooks().get(optionNum - 1).isCheckedOut()) {
                     System.out.println("That book is not available.");
-                    System.out.println("Input another book number or press 'm' to main menu:");
+                    System.out.print("Input another book number or press 'm' to main menu:");
                     continue;
                 } else {
                     System.out.println("Thank you! Enjoy the book");
@@ -137,7 +137,7 @@ public class Biblioteca {
                 }
             } else {
                 System.out.println("That book is not available.");
-                System.out.println("Input another book number or press 'm' to main menu:");
+                System.out.print("Input another book number or press 'm' to main menu:");
                 continue;
             }
         }
@@ -158,7 +158,7 @@ public class Biblioteca {
                 System.exit(0);
             } else {
                 System.out.println("That is not a valid book to return.");
-                System.out.println("Pleasure input valid book name or input 'm' to main menu:");
+                System.out.print("Pleasure input valid book name or input 'm' to main menu:");
             }
         }
     }

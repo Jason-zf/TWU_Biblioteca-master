@@ -30,6 +30,8 @@ public class Menu {
             System.out.print(String.valueOf(i + 1) + ".");
             System.out.println(menuList.get(i));
         }
-        System.out.print("Choose one option with number:");
+        System.out.println();
+
+        System.out.print("Choose one option with number or quit:");
     }
 }
