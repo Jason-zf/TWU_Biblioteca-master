@@ -4,6 +4,8 @@ import com.twu.biblioteca.core.Menu;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -45,4 +47,14 @@ public class MenuTest {
         assertEquals(names, menu.getMenuList());
     }
 
+    @Test
+    public void should_print_menu_list_when_print() {
+        String expectedStr = "1.List Books\r\n" +
+                "Choose one option with number:";
+        ByteArrayOutputStream systemOutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(systemOutContent));
+        menu.print();
+
+        assertEquals(expectedStr, systemOutContent.toString());
+    }
 }
