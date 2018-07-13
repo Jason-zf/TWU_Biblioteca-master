@@ -7,22 +7,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Biblioteca {
-    private Menu mainMenu = new Menu();
-    private BookRepository bookRepository = new BookRepository();
+    private Menu mainMenu;
+    private BookRepository bookRepository;
 
     public Biblioteca() {
+        mainMenu = new Menu();
+        bookRepository = new BookRepository();
     }
 
-    public void start() {
+    public boolean start() {
         System.out.println();
         System.out.println("Welcome to the Biblioteca library!");
         System.out.println();
 
         Scanner scanner = new Scanner(System.in);
-        mainMenuProcess(scanner);
+        return mainMenuProcess(scanner);
     }
 
-    private void mainMenuProcess(Scanner scanner) {
+    private boolean mainMenuProcess(Scanner scanner) {
         System.out.println();
         System.out.println("Main menu:");
         mainMenu.print();
@@ -34,7 +36,7 @@ public class Biblioteca {
                 optionNum = Integer.parseInt(in);
             } catch (NumberFormatException e) {
                 if (in.toLowerCase().equals("q") || in.toLowerCase().equals("quit")) {
-                    System.exit(0);
+                    return false;
                 }
                 System.out.println("Select a valid option!");
                 System.out.print("Choose one option with number:");
@@ -51,19 +53,16 @@ public class Biblioteca {
         switch (optionNum) {
             case 1:
                 bookRepository.print();
-                subMenuProcess(scanner);
-                break;
+                return subMenuProcess(scanner);
             case 2:
                 break;
             case 3:
                 break;
-            default:
-                subMenuProcess(scanner);
-                break;
         }
+        return true;
     }
 
-    private void subMenuProcess(Scanner scanner) {
+    private boolean subMenuProcess(Scanner scanner) {
         Menu subMenu = new Menu(new ArrayList<String>() {{
             add(".Checkout Book");
             add(".Return Book");
@@ -78,7 +77,7 @@ public class Biblioteca {
                 optionNum = Integer.parseInt(in);
             } catch (NumberFormatException e) {
                 if (in.toLowerCase().equals("q") || in.toLowerCase().equals("quit")) {
-                    System.exit(0);
+                    return false;
                 }
                 System.out.println("Select a valid option!");
                 System.out.print("Choose one option with number:");
@@ -94,18 +93,15 @@ public class Biblioteca {
 
         switch (optionNum) {
             case 1:
-                checkedOutBookProcess(scanner);
-                break;
+                return checkedOutBookProcess(scanner);
             case 2:
-                returnBookProcess(scanner);
-                break;
+                return returnBookProcess(scanner);
             default:
-                mainMenuProcess(scanner);
-                break;
+                return mainMenuProcess(scanner);
         }
     }
 
-    private void checkedOutBookProcess(Scanner scanner) {
+    private boolean checkedOutBookProcess(Scanner scanner) {
         System.out.println();
         System.out.print("Input a book number to checkout or input 'm' to main menu:");
         Integer optionNum = 1;
@@ -116,11 +112,10 @@ public class Biblioteca {
                 optionNum = Integer.parseInt(in);
             } catch (NumberFormatException e) {
                 if (in.toLowerCase().equals("q") || in.toLowerCase().equals("quit")) {
-                    System.exit(0);
+                    return false;
                 }
                 if (in.toLowerCase().equals("m")) {
-                    mainMenuProcess(scanner);
-                    continue;
+                    return mainMenuProcess(scanner);
                 }
                 System.out.println("Select a valid option!");
                 System.out.print("Input a book number or input 'm' to main menu:");
@@ -134,7 +129,7 @@ public class Biblioteca {
                 } else {
                     System.out.println("Thank you! Enjoy the book");
                     bookRepository.getBooks().get(optionNum - 1).setCheckedOut(true);
-                    mainMenuProcess(scanner);
+                    return mainMenuProcess(scanner);
                 }
             } else {
                 System.out.println("That book is not available.");
@@ -142,10 +137,9 @@ public class Biblioteca {
                 continue;
             }
         }
-
     }
 
-    private void returnBookProcess(Scanner scanner) {
+    private boolean returnBookProcess(Scanner scanner) {
         System.out.println();
         System.out.print("Input a return book name or input 'm' to main menu:");
         String name = "";
@@ -154,9 +148,9 @@ public class Biblioteca {
             if (bookRepository.isValidBook(name)) {
                 bookRepository.getBook(name).setCheckedOut(false);
                 System.out.println("Thank you for returning the book.");
-                mainMenuProcess(scanner);
+                return mainMenuProcess(scanner);
             } else if (name.toLowerCase().equals("q") || name.toLowerCase().equals("quit")) {
-                System.exit(0);
+                return false;
             } else {
                 System.out.println("That is not a valid book to return.");
                 System.out.print("Pleasure input valid book name or input 'm' to main menu:");

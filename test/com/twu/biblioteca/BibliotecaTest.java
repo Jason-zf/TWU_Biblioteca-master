@@ -71,7 +71,7 @@ public class BibliotecaTest {
 
     @Test
     public void should_judge_invalid_option() {
-        setSystemInContent("2\nq\n");
+        setSystemInContent("3\nq\n");
         biblioteca.start();
 
         String expectedStr = "Select a valid option!";
@@ -115,7 +115,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_return_book_when_this_book_not_belong_to_Biblioteca() {
-        setSystemInContent("1\n1\n1\n1\n2\nbook3\nq\n");
+        setSystemInContent("1\n1\n1\n1\n2\nbook5\nq\n");
         biblioteca.start();
 
         String expectedStr = "That is not a valid book to return.";

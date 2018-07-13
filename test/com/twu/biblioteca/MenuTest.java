@@ -23,7 +23,9 @@ public class MenuTest {
         ArrayList<String> names = menu.getMenuList();
 
         assertEquals(1, names.size());
-        assertEquals("List Books", names.get(0));
+        assertEquals(new ArrayList<String>() {{
+            add("List Books");
+        }}, names);
     }
 
     @Test
