@@ -133,6 +133,7 @@ public class Biblioteca {
                     continue;
                 } else {
                     System.out.println("Thank you! Enjoy the book");
+                    bookControl.getBooks().get(optionNum-1).setCheckedOut(true);
                     mainMenuProcess(scanner);
                 }
             } else {
