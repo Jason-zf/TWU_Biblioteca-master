@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.core.Book;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class BookTest {
 
     @Before
     public void setUp() {
-        book = new Book("book1", "zhangsan", 2018, false);
+        book = new Book("book1", "zhangsan", 2018);
     }
 
     @Test

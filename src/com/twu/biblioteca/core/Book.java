@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.core;
 
 public class Book {
     String name;
@@ -6,11 +6,11 @@ public class Book {
     Integer yearPublished;
     boolean checkedOut;
 
-    public Book(String name, String author, Integer yearPublished, boolean checkedOut) {
+    public Book(String name, String author, Integer yearPublished) {
         this.name = name;
         this.author = author;
         this.yearPublished = yearPublished;
-        this.checkedOut = checkedOut;
+        this.checkedOut = false;
     }
 
     public String getName() {
