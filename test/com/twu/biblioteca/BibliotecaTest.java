@@ -124,4 +124,49 @@ public class BibliotecaTest {
         assertTrue(systemOutContent.toString().contains(expectedStr));
     }
 
+    @Test
+    public void customer_could_checkout_a_movie_when_movie_is_not_checkedOut() {
+        setSystemInContent("2\n1\n1\nq\n");
+        biblioteca.start();
+
+        String expectedStr = "Thank you! Enjoy the movie";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+    @Test
+    public void customer_could_not_checkout_a_movie_when_movie_is_already_checkedOut() {
+        setSystemInContent("2\n1\n4\nq\n");
+        biblioteca.start();
+
+        String expectedStr = "That movie is not available.";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+    @Test
+    public void customer_could_return_movie_when_this_movie_belong_to_Biblioteca() {
+        setSystemInContent("2\n2\n2\n2\n2\nmovie1\nq\n");
+        biblioteca.start();
+
+        String expectedStr = "Thank you for returning the movie.";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+    @Test
+    public void customer_could_not_return_movie_when_this_movie_not_belong_to_Biblioteca() {
+        setSystemInContent("2\n2\n2\n2\n2\nmovie5\nq\n");
+        biblioteca.start();
+
+        String expectedStr = "That is not a valid movie to return.";
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
+    }
+
+
 }
