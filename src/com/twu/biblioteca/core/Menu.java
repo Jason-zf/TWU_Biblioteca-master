@@ -24,4 +24,12 @@ public class Menu {
     public void addMenu(String menuName) {
         menuList.add(menuName);
     }
+
+    public void print() {
+        for (int i = 0; i < menuList.size(); ++i) {
+            System.out.print(String.valueOf(i + 1) + ".");
+            System.out.println(menuList.get(i));
+        }
+        System.out.println("Choose one option with number:");
+    }
 }

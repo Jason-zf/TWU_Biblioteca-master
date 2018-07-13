@@ -20,20 +20,18 @@ public class BookControl {
         return books;
     }
 
-    public String print() {
+    public void print() {
         String res = "";
         String splitLine = "";
-        for (int i = 0; i < 48; i++) {
+        for (int i = 0; i < 65; i++) {
             splitLine += "-";
         }
-        res += splitLine + "\n" + String.format("%-15s %-15s %-15s", "|Name", "|Author", "|Year Published") + "|\n" + splitLine + "\n";
+        res += splitLine + "\n" + String.format("%-15s %-15s %-15s %-15s", "|Number", "|Name", "|Author", "|Year Published") + "|\n" + splitLine + "\n";
         for (int i = 0; i < books.size(); ++i) {
             Book book = books.get(i);
-            res += String.format("%-15s %-15s %-15s", "|" + book.getName(), "|" + book.getAuthor(), "|" + book.getYearPublished()) + "|\n";
+            res += String.format("%-15s %-15s %-15s %-15s", "|" + String.valueOf(i + 1), "|" + book.getName(), "|" + book.getAuthor(), "|" + book.getYearPublished()) + "|\n";
         }
-        res += splitLine;
-        return res;
-
-
+        res += splitLine + "\n";
+        System.out.print(res);
     }
 }
