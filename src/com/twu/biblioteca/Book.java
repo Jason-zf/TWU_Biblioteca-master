@@ -4,13 +4,13 @@ public class Book {
     String name;
     String author;
     Integer yearPublished;
-    boolean checkOut;
+    boolean checkedOut;
 
-    public Book(String name, String author, Integer yearPublished, boolean checkOut) {
+    public Book(String name, String author, Integer yearPublished, boolean checkedOut) {
         this.name = name;
         this.author = author;
         this.yearPublished = yearPublished;
-        this.checkOut = checkOut;
+        this.checkedOut = checkedOut;
     }
 
     public String getName() {
@@ -25,11 +25,11 @@ public class Book {
         return yearPublished;
     }
 
-    public boolean isCheckOut() {
-        return checkOut;
+    public boolean isCheckedOut() {
+        return checkedOut;
     }
 
-    public void setCheckOut(boolean checkOut) {
-        this.checkOut = checkOut;
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
     }
 }

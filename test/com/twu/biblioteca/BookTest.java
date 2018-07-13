@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BookTest {
     private Book book;
@@ -19,6 +20,7 @@ public class BookTest {
         String actualAuthor = book.getAuthor();
         String expectedAuthor = "zhangsan";
 
+        assertTrue(!actualAuthor.isEmpty());
         assertEquals(expectedAuthor, actualAuthor);
     }
 
@@ -27,6 +29,7 @@ public class BookTest {
         String actualName = book.getName();
         String expectedName = "book1";
 
+        assertTrue(!actualName.isEmpty());
         assertEquals(expectedName, actualName);
     }
 
@@ -35,14 +38,15 @@ public class BookTest {
         Integer actualYearPublished = book.getYearPublished();
         Integer expectedYearPublished = 2018;
 
+        assertTrue(actualYearPublished != 0);
         assertEquals(expectedYearPublished, actualYearPublished);
     }
 
     @Test
-    public void should_return_checkout_or_not_when_get_book_checkout_state() {
-        boolean bookCheckOut = book.isCheckOut();
+    public void should_return_checkedOut_or_not_when_get_book_checkedOut_state() {
+        boolean bookCheckedOut = book.isCheckedOut();
 
-        assertFalse(bookCheckOut);
+        assertFalse(bookCheckedOut);
     }
 
 }
