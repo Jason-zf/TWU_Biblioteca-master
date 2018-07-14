@@ -1,6 +1,7 @@
 package com.twu.biblioteca.core;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserAccount {
     private String ID;
@@ -51,5 +52,19 @@ public class UserAccount {
         res += splitLine + "\n" + String.format("%-15s %-15s %-15s", "|Name", "|Email", "|Phone") + "|\n" + splitLine + "\n";
         res += String.format("%-15s %-15s %-15s", "|" + name, "|" + email, "|" + phoneNumber) + "|\n" + splitLine + "\n";
         System.out.print(res);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAccount that = (UserAccount) o;
+        return Objects.equals(ID, that.ID);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(ID);
     }
 }
