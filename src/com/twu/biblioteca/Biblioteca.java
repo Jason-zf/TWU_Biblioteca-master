@@ -18,6 +18,7 @@ public class Biblioteca {
     private MovieRepository movieRepository = new MovieRepository();
     private UserAccountRepository userAccountRepository = new UserAccountRepository();
     private UserAccount userAccount = null;
+    private final UserAccount librarian = new UserAccount("000-0001", "password0", "librarian", "librarian@163.com", "12345678900");
     private Boolean isBook = true;
     private final int MAX_INPUT_TIMES = 6;
 
@@ -41,10 +42,16 @@ public class Biblioteca {
 
             userAccount = userAccountRepository.getOne(id);
             if (userAccount != null && userAccount.getPassword().equals(password)) {
+                //librarian
+                if (userAccount.equals(librarian)) {
+                    userAccountRepository.print();
+                    return false;
+                }
+                //user
                 userAccount.print();
                 return true;
             }
-            System.out.print("User name or password incorrect,pleasure input again(you have six times to input)!");
+            System.out.print("User name or password incorrect,pleasure input again(you have six times to input)!\n");
         }
         System.out.print("You have run out six opportunities,pleasure try another time!");
         return false;

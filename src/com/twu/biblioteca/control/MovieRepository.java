@@ -11,6 +11,8 @@ public class MovieRepository extends Repository<Movie> {
         movies.add(new Movie("movie1", 2000, "zhangsan", "1"));
         movies.add(new Movie("movie2", 2005, "lisi", "5"));
         movies.add(new Movie("movie3", 2010, "wangwu", "unrated"));
+        movies.add(new Movie("movie4", 2010, "wangwu", "9"));
+        movies.get(2).setCheckedOut(true);
     }
 
     @Override

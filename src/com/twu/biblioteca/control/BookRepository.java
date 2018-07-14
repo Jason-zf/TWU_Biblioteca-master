@@ -11,6 +11,10 @@ public class BookRepository extends Repository<Book> {
         books.add(new Book("book1", "zhangsan", 2000));
         books.add(new Book("book2", "lisi", 2005));
         books.add(new Book("book3", "wangwu", 2010));
+        books.add(new Book("book4", "liuer", 2010));
+        books.add(new Book("book5", "jiangyu", 2010));
+        books.get(0).setCheckedOut(true);
+        books.get(2).setCheckedOut(true);
     }
 
     @Override
