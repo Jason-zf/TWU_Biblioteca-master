@@ -4,7 +4,7 @@ import com.twu.biblioteca.core.Movie;
 
 import java.util.ArrayList;
 
-public class MovieRepository {
+public class MovieRepository extends Repository<Movie> {
     private ArrayList<Movie> movies = new ArrayList<>();
 
     public MovieRepository() {
@@ -13,10 +13,32 @@ public class MovieRepository {
         movies.add(new Movie("movie3", 2010, "wangwu", "unrated"));
     }
 
-    public ArrayList<Movie> getMovies() {
+    @Override
+    public Movie getOne(String name) {
+        for (int i = 0; i < movies.size(); ++i) {
+            if (movies.get(i).getName().equals(name)) {
+                return movies.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Movie> getAll() {
         return movies;
     }
 
+    @Override
+    public boolean isValid(String name) {
+        for (int i = 0; i < movies.size(); ++i) {
+            if (movies.get(i).getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void print() {
         String res = "";
         String splitLine = "";
@@ -32,23 +54,5 @@ public class MovieRepository {
         }
         res += splitLine + "\n";
         System.out.print(res);
-    }
-
-    public boolean isValidMovie(String name) {
-        for (int i = 0; i < movies.size(); ++i) {
-            if (movies.get(i).getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Movie getMovie(String name) {
-        for (int i = 0; i < movies.size(); ++i) {
-            if (movies.get(i).getName().equals(name)) {
-                return movies.get(i);
-            }
-        }
-        return null;
     }
 }

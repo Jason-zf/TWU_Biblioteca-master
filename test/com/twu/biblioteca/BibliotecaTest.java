@@ -167,6 +167,4 @@ public class BibliotecaTest {
         assertFalse(systemOutContent.toString().isEmpty());
         assertTrue(systemOutContent.toString().contains(expectedStr));
     }
-
-
 }

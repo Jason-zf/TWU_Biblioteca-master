@@ -29,7 +29,7 @@ public class BookRepositoryTest {
             add(new Book("book3", "wangwu", 2010));
         }};
 
-        assertEquals(expectedBooks, bookRepository.getBooks());
+        assertEquals(expectedBooks, bookRepository.getAll());
     }
 
     @Test
@@ -50,14 +50,14 @@ public class BookRepositoryTest {
 
     @Test
     public void should_return_true_when_book_is_valid() {
-        boolean flag = bookRepository.isValidBook("book1");
+        boolean flag = bookRepository.isValid("book1");
 
         assertTrue(flag);
     }
 
     @Test
     public void should_return_false_when_book_is_invalid() {
-        boolean flag = bookRepository.isValidBook("book4");
+        boolean flag = bookRepository.isValid("book4");
 
         assertFalse(flag);
     }
@@ -66,13 +66,13 @@ public class BookRepositoryTest {
     public void should_return_book_when_get_valid_book() {
         Book book = new Book("book1", "zhangsan", 2000);
 
-        assertEquals(book, bookRepository.getBook("book1"));
+        assertEquals(book, bookRepository.getOne("book1"));
     }
 
     @Test
     public void should_return_null_when_get_invalid_book() {
         Book book = null;
 
-        assertEquals(book, bookRepository.getBook("book4"));
+        assertEquals(book, bookRepository.getOne("book4"));
     }
 }

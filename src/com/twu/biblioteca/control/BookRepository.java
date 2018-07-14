@@ -4,7 +4,7 @@ import com.twu.biblioteca.core.Book;
 
 import java.util.ArrayList;
 
-public class BookRepository {
+public class BookRepository extends Repository<Book> {
     private ArrayList<Book> books = new ArrayList<Book>();
 
     public BookRepository() {
@@ -13,10 +13,32 @@ public class BookRepository {
         books.add(new Book("book3", "wangwu", 2010));
     }
 
-    public ArrayList<Book> getBooks() {
+    @Override
+    public Book getOne(String name) {
+        for (int i = 0; i < books.size(); ++i) {
+            if (books.get(i).getName().equals(name)) {
+                return books.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Book> getAll() {
         return books;
     }
 
+    @Override
+    public boolean isValid(String name) {
+        for (int i = 0; i < books.size(); ++i) {
+            if (books.get(i).getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void print() {
         String res = "";
         String splitLine = "";
@@ -32,23 +54,5 @@ public class BookRepository {
         }
         res += splitLine + "\n";
         System.out.print(res);
-    }
-
-    public boolean isValidBook(String name) {
-        for (int i = 0; i < books.size(); ++i) {
-            if (books.get(i).getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Book getBook(String name) {
-        for (int i = 0; i < books.size(); ++i) {
-            if (books.get(i).getName().equals(name)) {
-                return books.get(i);
-            }
-        }
-        return null;
     }
 }
