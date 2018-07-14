@@ -29,9 +29,8 @@ public class BibliotecaTest {
         systemErrorContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(systemOutContent));
         System.setErr(new PrintStream(systemErrorContent));
-        setSystemInContent("1\nq\n");
+        setSystemInContent("001-0001\npassword1\n1\nq\n");
     }
-
 
     @Test
     public void should_return_welcome_when_first_start() {
@@ -41,6 +40,20 @@ public class BibliotecaTest {
         assertTrue(systemErrorContent.toString().isEmpty());
         assertFalse(systemOutContent.toString().isEmpty());
         assertTrue(systemOutContent.toString().startsWith(expectedStr));
+    }
+
+    @Test
+    public void should_return_user_information_when_first_start() {
+        biblioteca.start();
+        String expectedStr = "------------------------------------------------\n" +
+                "|Name           |Email          |Phone         |\n" +
+                "------------------------------------------------\n" +
+                "|user1          |user1@163.com  |12345678901   |\n" +
+                "------------------------------------------------";
+
+        assertTrue(systemErrorContent.toString().isEmpty());
+        assertFalse(systemOutContent.toString().isEmpty());
+        assertTrue(systemOutContent.toString().contains(expectedStr));
     }
 
     @Test
@@ -71,7 +84,7 @@ public class BibliotecaTest {
 
     @Test
     public void should_judge_invalid_option() {
-        setSystemInContent("3\nq\n");
+        setSystemInContent("001-0001\npassword1\n3\nq\n");
         biblioteca.start();
 
         String expectedStr = "Select a valid option!";
@@ -82,7 +95,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_checkout_a_book_when_book_is_not_checkedOut() {
-        setSystemInContent("1\n1\n1\nq\n");
+        setSystemInContent("001-0001\npassword1\n1\n1\n1\nq\n");
         biblioteca.start();
 
         String expectedStr = "Thank you! Enjoy the book";
@@ -93,7 +106,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_checkout_a_book_when_book_is_already_checkedOut() {
-        setSystemInContent("1\n1\n4\nq\n");
+        setSystemInContent("001-0001\npassword1\n1\n1\n4\nq\n");
         biblioteca.start();
 
         String expectedStr = "That book is not available.";
@@ -104,7 +117,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_return_book_when_this_book_belong_to_Biblioteca() {
-        setSystemInContent("1\n1\n1\n1\n2\nbook1\nq\n");
+        setSystemInContent("001-0001\npassword1\n1\n1\n1\n1\n2\nbook1\nq\n");
         biblioteca.start();
 
         String expectedStr = "Thank you for returning the book.";
@@ -115,7 +128,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_return_book_when_this_book_not_belong_to_Biblioteca() {
-        setSystemInContent("1\n1\n1\n1\n2\nbook5\nq\n");
+        setSystemInContent("001-0001\npassword1\n1\n1\n1\n1\n2\nbook5\nq\n");
         biblioteca.start();
 
         String expectedStr = "That is not a valid book to return.";
@@ -126,7 +139,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_checkout_a_movie_when_movie_is_not_checkedOut() {
-        setSystemInContent("2\n1\n1\nq\n");
+        setSystemInContent("001-0001\npassword1\n2\n1\n1\nq\n");
         biblioteca.start();
 
         String expectedStr = "Thank you! Enjoy the movie";
@@ -137,7 +150,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_checkout_a_movie_when_movie_is_already_checkedOut() {
-        setSystemInContent("2\n1\n4\nq\n");
+        setSystemInContent("001-0001\npassword1\n2\n1\n4\nq\n");
         biblioteca.start();
 
         String expectedStr = "That movie is not available.";
@@ -148,7 +161,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_return_movie_when_this_movie_belong_to_Biblioteca() {
-        setSystemInContent("2\n2\n2\n2\n2\nmovie1\nq\n");
+        setSystemInContent("001-0001\npassword1\n2\n2\n2\n2\n2\nmovie1\nq\n");
         biblioteca.start();
 
         String expectedStr = "Thank you for returning the movie.";
@@ -159,7 +172,7 @@ public class BibliotecaTest {
 
     @Test
     public void customer_could_not_return_movie_when_this_movie_not_belong_to_Biblioteca() {
-        setSystemInContent("2\n2\n2\n2\n2\nmovie5\nq\n");
+        setSystemInContent("001-0001\npassword1\n2\n2\n2\n2\n2\nmovie5\nq\n");
         biblioteca.start();
 
         String expectedStr = "That is not a valid movie to return.";

@@ -3,9 +3,11 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.control.BookRepository;
 import com.twu.biblioteca.control.MovieRepository;
 import com.twu.biblioteca.control.Repository;
+import com.twu.biblioteca.control.UserAccountRepository;
 import com.twu.biblioteca.core.Book;
 import com.twu.biblioteca.core.Menu;
 import com.twu.biblioteca.core.Movie;
+import com.twu.biblioteca.core.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,15 +16,38 @@ public class Biblioteca {
     private Menu mainMenu = new Menu();
     private BookRepository bookRepository = new BookRepository();
     private MovieRepository movieRepository = new MovieRepository();
+    private UserAccountRepository userAccountRepository = new UserAccountRepository();
     private Boolean isBook = true;
+    private final int MAX_INPUT_TIMES = 6;
 
     public boolean start() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println();
         System.out.println("Welcome to the Biblioteca library!");
         System.out.println();
+        if (login(scanner)) {
+            return mainMenuProcess(scanner);
+        }
+        return false;
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        return mainMenuProcess(scanner);
+    private Boolean login(Scanner scanner) {
+        for (int i = 0; i < MAX_INPUT_TIMES; ++i) {
+            System.out.print("Pleasure input your ID(xxx-xxxx):");
+            System.out.println();
+            System.out.println("Pleasure input your password:");
+            String id = scanner.nextLine();
+            String password = scanner.nextLine();
+
+            UserAccount userAccount = userAccountRepository.getOne(id);
+            if (userAccount != null && userAccount.getPassword().equals(password)) {
+                userAccount.print();
+                return true;
+            }
+            System.out.print("User name or password incorrect,pleasure input again(you have six times to input)!");
+        }
+        System.out.print("You have run out six opportunities,pleasure try another time!");
+        return false;
     }
 
     private boolean mainMenuProcess(Scanner scanner) {
