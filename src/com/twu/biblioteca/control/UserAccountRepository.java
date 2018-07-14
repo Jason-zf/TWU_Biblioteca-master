@@ -8,6 +8,7 @@ public class UserAccountRepository {
     private ArrayList<UserAccount> userAccounts = new ArrayList<>();
 
     public UserAccountRepository() {
+        userAccounts.add(new UserAccount("000-0001", "password0", "librarian", "librarian@163.com", "12345678900"));
         userAccounts.add(new UserAccount("001-0001", "password1", "user1", "user1@163.com", "12345678901"));
         userAccounts.add(new UserAccount("001-0002", "password2", "user2", "user2@163.com", "12345678902"));
         userAccounts.add(new UserAccount("001-0003", "password3", "user3", "user3@163.com", "12345678903"));

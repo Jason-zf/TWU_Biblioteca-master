@@ -10,6 +10,7 @@ public class UserAccount {
     private String email;
     private String phoneNumber;
     private ArrayList<Book> checkedOutBooks = new ArrayList<>();
+    private ArrayList<Movie> checkedOutMovies = new ArrayList<>();
 
     public UserAccount(String ID, String password, String name, String email, String phoneNumber) {
         this.ID = ID;
@@ -43,8 +44,13 @@ public class UserAccount {
         return checkedOutBooks;
     }
 
+    public ArrayList<Movie> getCheckedOutMovies() {
+        return checkedOutMovies;
+    }
+
     public void print() {
-        String res = "";
+        System.out.println();
+        String res = "User information:\n";
         String splitLine = "";
         for (int i = 0; i < 48; i++) {
             splitLine += "-";

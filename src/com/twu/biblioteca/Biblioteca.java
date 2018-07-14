@@ -17,6 +17,7 @@ public class Biblioteca {
     private BookRepository bookRepository = new BookRepository();
     private MovieRepository movieRepository = new MovieRepository();
     private UserAccountRepository userAccountRepository = new UserAccountRepository();
+    private UserAccount userAccount = null;
     private Boolean isBook = true;
     private final int MAX_INPUT_TIMES = 6;
 
@@ -34,12 +35,11 @@ public class Biblioteca {
     private Boolean login(Scanner scanner) {
         for (int i = 0; i < MAX_INPUT_TIMES; ++i) {
             System.out.print("Pleasure input your ID(xxx-xxxx):");
-            System.out.println();
-            System.out.println("Pleasure input your password:");
             String id = scanner.nextLine();
+            System.out.print("Pleasure input your password:");
             String password = scanner.nextLine();
 
-            UserAccount userAccount = userAccountRepository.getOne(id);
+            userAccount = userAccountRepository.getOne(id);
             if (userAccount != null && userAccount.getPassword().equals(password)) {
                 userAccount.print();
                 return true;
@@ -166,11 +166,16 @@ public class Biblioteca {
             }
             if (isBook && 0 < optionNum && optionNum <= repository.getAll().size() && !((Book) repository.getAll().get(optionNum - 1)).isCheckedOut()) {
                 System.out.println("Thank you! Enjoy the book");
-                ((Book) repository.getAll().get(optionNum - 1)).setCheckedOut(true);
+                Book book = ((Book) repository.getAll().get(optionNum - 1));
+                book.setCheckedOut(true);
+                userAccount.getCheckedOutBooks().add(book);
+                userAccount.print();
                 return mainMenuProcess(scanner);
             } else if (!isBook && 0 < optionNum && optionNum <= repository.getAll().size() && !((Movie) repository.getAll().get(optionNum - 1)).isCheckedOut()) {
                 System.out.println("Thank you! Enjoy the movie");
-                ((Movie) repository.getAll().get(optionNum - 1)).setCheckedOut(true);
+                Movie movie = ((Movie) repository.getAll().get(optionNum - 1));
+                movie.setCheckedOut(true);
+                userAccount.getCheckedOutMovies().add(movie);
                 return mainMenuProcess(scanner);
             } else {
                 System.out.println("That " + (isBook == true ? "book" : "movie") + " is not available.");
@@ -190,11 +195,19 @@ public class Biblioteca {
                 return false;
             }
             if (isBook && repository.isValid(name)) {
-                ((Book) repository.getOne(name)).setCheckedOut(false);
+                Book book = ((Book) repository.getOne(name));
+                book.setCheckedOut(false);
+                if (userAccount.getCheckedOutMovies().contains(book)) {
+                    userAccount.getCheckedOutMovies().remove(book);
+                }
                 System.out.println("Thank you for returning the book.");
                 return mainMenuProcess(scanner);
             } else if (!isBook && repository.isValid(name)) {
-                ((Movie) repository.getOne(name)).setCheckedOut(false);
+                Movie movie = ((Movie) repository.getOne(name));
+                movie.setCheckedOut(false);
+                if (userAccount.getCheckedOutMovies().contains(movie)) {
+                    userAccount.getCheckedOutMovies().remove(movie);
+                }
                 System.out.println("Thank you for returning the movie.");
                 return mainMenuProcess(scanner);
             }
